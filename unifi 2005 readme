@@ -1,0 +1,16 @@
+MongoDB User Creation:
+
+Previously: We were using environment variables like MONGO_INITDB_ROOT_USERNAME. This method creates the user in MongoDB's admin database by default.
+This time: We used an init-mongo.js script.
+Correct User Location:
+
+The UniFi controller was always looking for unifiuser with its credentials stored inside the unifi database (your logs showed source='unifi').
+The init-mongo.js script specifically created unifiuser and its password directly within the unifi database, exactly where the controller expected it.
+Fresh MongoDB Start:
+
+We configured MongoDB to use a brand new, empty data directory (/home/cole66/unifi/unifi_netapp/mongo_data_v44_scriptinit).
+This was crucial because MongoDB only runs initialization scripts (like our init-mongo.js) when it starts with an empty data directory.
+Simplified Controller Configuration:
+
+Because the unifiuser was now correctly defined in the unifi database (which the controller was already targeting with MONGO_DBNAME=unifi), we removed the MONGO_AUTHSOURCE=admin setting from the UniFi controller's environment variables, as it was no longer needed.
+Essentially, the init-mongo.js script ensured the unifiuser was created in the precise database (unifi) and with the correct permissions that the UniFi controller application requires, and starting with a fresh database volume ensured that script was executed.
