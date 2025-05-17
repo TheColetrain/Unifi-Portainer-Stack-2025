@@ -4,8 +4,8 @@ services:
     container_name: unifi-mongo-portainer
     restart: unless-stopped
     volumes:
-      - /home/cole66/unifi/unifi_netapp/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-      - /home/cole66/unifi/unifi_netapp/mongo_data_v44_scriptinit:/data/db # NEW, EMPTY data directory
+      - /home/USER/unifi/unifi_netapp/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - /home/USER/unifi/unifi_netapp/mongo_data_v44_scriptinit:/data/db # NEW, EMPTY data directory
     environment:
       MONGO_INITDB_DATABASE: unifi # Ensures 'unifi' db context for the script
     networks:
@@ -23,11 +23,11 @@ services:
       - "10001:10001/udp"
       - "8080:8080/tcp"
     volumes:
-      - /home/cole66/unifi/unifi_netapp/unifi_netconfig:/config
+      - /home/USER/unifi/unifi_netapp/unifi_netconfig:/config
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Chicago
+      - TZ=America/Chicago  # CHANGE IF YOU WANT 
       - MONGO_USER=unifiuser
       - MONGO_PASS=unifipassword
       - MONGO_HOST=mongo
@@ -43,3 +43,6 @@ services:
 networks:
   unifi-portainer-network:
     driver: bridge
+
+
+    # I PUT IT IN MY HOME DIRECORY.  THEREFORE "USER" IS MINE.  CHANGE PATH TO WHAT YOU LIKE, BUT I HAD TO MAP THEM, NOT `- ./unifi_app_config:/config`
