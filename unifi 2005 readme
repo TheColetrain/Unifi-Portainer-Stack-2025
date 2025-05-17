@@ -8,7 +8,7 @@ The UniFi controller was always looking for unifiuser with its credentials store
 The init-mongo.js script specifically created unifiuser and its password directly within the unifi database, exactly where the controller expected it.
 Fresh MongoDB Start:
 
-We configured MongoDB to use a brand new, empty data directory (/home/cole66/unifi/unifi_netapp/mongo_data_v44_scriptinit).
+**We configured MongoDB to use a brand new, empty data directory (/home/user/unifi/unifi_netapp/mongo_data_v44_scriptinit).**
 This was crucial because MongoDB only runs initialization scripts (like our init-mongo.js) when it starts with an empty data directory.
 Simplified Controller Configuration:
 
