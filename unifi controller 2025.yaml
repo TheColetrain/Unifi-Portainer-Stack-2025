@@ -1,6 +1,6 @@
 services:
   mongo:
-    image: mongo:4.4
+    image: mongo:7.0
     container_name: unifi-mongo-portainer
     restart: unless-stopped
     volumes:
